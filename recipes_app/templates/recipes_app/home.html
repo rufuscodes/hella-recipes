@@ -1,8 +1,23 @@
 {% extends 'recipes_app/base.html' %} {% block content %}
 
-<h1>Recipes App Home</h1>
-{% for recipe in recipes %}
-<h1>{{ recipe.title }}</h1>
-<p>{{ recipe.author }} {{ recipe.date_posted }}</p>
-<p>{{ recipe.directions }}</p>
-{% endfor %} {% endblock %}
+<div class="container my-4">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="card-title">Recipes App Home</h1>
+
+      {% for recipe in recipes %}
+      <h2 class="mt-4">{{ recipe.title }}</h2>
+      <h6 class="card-subtitle mb-2 text-muted">
+        {{ recipe.author }} | {{ recipe.date_posted }}
+      </h6>
+      <p class="card-text">{{ recipe.directions }}</p>
+      <!-- Save and Delete buttons -->
+      <button class="btn btn-primary">Save to Favorites</button>
+      <button class="btn btn-danger">Delete</button>
+      <button class="btn btn-secondary">Share</button>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
