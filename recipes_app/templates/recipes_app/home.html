@@ -1,22 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE-edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {% if title %}
-    <title>{{ title }}</title>
-    {% else %}
-    <title>Recipes App</title>
-    {% endif %}
-  </head>
+{% extends 'recipes_app/base.html' %} {% block content %}
 
-  <body>
-    <h1>Recipes App Home</h1>
-    {% for recipe in recipes %}
-    <h1>{{ recipe.title }}</h1>
-    <p>{{ recipe.author }} {{ recipe.date_posted }}</p>
-    <p>{{ recipe.directions }}</p>
-    {% endfor %}
-  </body>
-</html>
+<h1>Recipes App Home</h1>
+{% for recipe in recipes %}
+<h1>{{ recipe.title }}</h1>
+<p>{{ recipe.author }} {{ recipe.date_posted }}</p>
+<p>{{ recipe.directions }}</p>
+{% endfor %} {% endblock %}
