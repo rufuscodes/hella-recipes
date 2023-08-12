@@ -32,6 +32,9 @@
       <p class="card-text">{{ recipe.directions }}</p>
 
       <!-- Save, Share, and Delete buttons -->
+      <a href="{% url 'recipes-detail' recipe.pk %}" class="card-link"
+        >View Recipe</a
+      >
       <button class="btn btn-primary">Save to Favorites</button>
       <button class="btn btn-secondary">Share</button>
       <button class="btn btn-danger">Delete</button>

@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 from . import models
@@ -22,6 +23,15 @@ class RecipeListView(ListView):
 
 class RecipeDetailView(DetailView):
     model = models.Recipe
+
+
+class RecipeCreateView( LoginRequiredMixin, CreateView):
+    model = models.Recipe
+    fields = ['title', 'description']
+    
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
 
 def about(request):
