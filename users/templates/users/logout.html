@@ -1,0 +1,11 @@
+{% extends 'recipes_app/base.html' %} {% load crispy_forms_tags %}
+<!- -->
+
+{% block content %}
+<div class="conatiner">
+  <h2>You have been logged out</h2>
+  <div class="border-top pt-3">
+    <a href="{% url 'user-login' %}">Login here</a>
+  </div>
+</div>
+{% endblock content %}

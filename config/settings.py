@@ -30,6 +30,10 @@ INSTALLED_APPS = [
     #Locally Created apps
     'recipes_app',
     'users',
+    
+    
+    # extra packages
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -121,3 +125,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+
+LOGIN_REDIRECT_URL = 'recipes-home'
