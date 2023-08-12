@@ -1,4 +1,7 @@
 from django.shortcuts import render, HttpResponse
+from django.views.generic import ListView
+
+
 from . import models
 
 
@@ -10,6 +13,10 @@ def home(request):
         'recipes': recipes,
     }
     return render(request,"recipes_app/home.html", context)
+
+class RecipeListView(ListView):
+    model = models.Recipe
+    template_name = 'recipes_app/home.html'
 
 def about(request):
     
