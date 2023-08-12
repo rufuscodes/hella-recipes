@@ -27,9 +27,13 @@
       <p class="card-text">{{ object.description }}</p>
 
       <!-- Save, Share, and Delete buttons -->
-      <button class="btn btn-primary">Save to Favorites</button>
-      <button class="btn btn-secondary">Share</button>
-      <button class="btn btn-danger">Delete</button>
+      <a href="" class="btn btn-primary">Save to Favorites</a>
+      <a href="{% url 'recipes-update' object.id %}" class="btn btn-secondary"
+        >Edit Recipe</a
+      >
+      <a href="{% url 'recipes-delete' object.id %}" class="btn btn-danger"
+        >Delete Recipe</a
+      >
     </div>
   </div>
 </div>
