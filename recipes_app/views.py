@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 
 from . import models
@@ -17,6 +17,12 @@ def home(request):
 class RecipeListView(ListView):
     model = models.Recipe
     template_name = 'recipes_app/home.html'
+    context_object_name = 'recipes'
+
+
+class RecipeDetailView(DetailView):
+    model = models.Recipe
+
 
 def about(request):
     
