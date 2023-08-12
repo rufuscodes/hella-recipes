@@ -1,0 +1,20 @@
+{% extends 'recipes_app/base.html' %}
+
+{% block content %}
+<div class="conatiner">
+    <form>
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <lengend class="border-bootom mb-4">Sign Up! </legend>
+            {{ form.as_p }}
+        </fieldset>
+        <div class="form-group py-3">
+            <input type="submit" class="btn btn-outline-primary" value="Sign Up!">
+        </div>
+    <div class="border-top pt-3">
+        <a href="#" >This user already exist</a>
+    </div>
+
+    </form>
+</div>
+{% endblock content %}

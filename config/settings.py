@@ -28,7 +28,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     #Locally Created apps
-    'recipes_app'
+    'recipes_app',
+    'users',
 ]
 
 MIDDLEWARE = [
