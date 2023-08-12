@@ -2,13 +2,18 @@
 
 
 {% block content %}
-<div class="conatiner">
-    <form method="POST">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <lengend class="border-bootom mb-4">Add recipe </legend>
-            {{ form.as_p }}
-        </fieldset>
+<h1>Add Recipe</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {{ formset.management_form }}
+    {% for ingredient_form in formset %}
+        {{ ingredient_form.as_p }}
+    {% endfor %}
+    <input type="submit" value="Save Recipe" />
+
+
         <div class="form-group py-3">
             <input type="submit" value="save" class="btn btn-outline-primary">
         </div>
