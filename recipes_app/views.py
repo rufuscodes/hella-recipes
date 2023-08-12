@@ -1,19 +1,15 @@
 from django.shortcuts import render, HttpResponse
-
-
-recipes = [{
-    'author': "Rufus",
-    'title': 'Da Town Pizza',
-    'directions': "Prep and cook",
-    'date_posted': 'April 16th, 2023'
-    
-}]
+from . import models
 
 
 # Create your views here.
 def home(request):
+    recipes = models.Recipe.objects.all().prefetch_related('recipeingredient_set__ingredient')
+
     context= {
         'recipes': recipes,
+        'test_variable': 'Hello, World!'
+
     }
     return render(request,"recipes_app/home.html", context)
 
