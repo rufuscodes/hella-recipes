@@ -55,7 +55,11 @@
     </nav>
 
     <!-- Main Content Area -->
-    <main class="container my-4">{% block content %} {% endblock %}</main>
+    <div class="container my-4 col-8">
+      {% if messages %} {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %} {% endif %} {% block content %} {% endblock %}
+    </div>
 
     <!-- Footer -->
     <footer class="bg-light py-3">

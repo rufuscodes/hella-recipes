@@ -8,8 +8,6 @@ def home(request):
 
     context= {
         'recipes': recipes,
-        'test_variable': 'Hello, World!'
-
     }
     return render(request,"recipes_app/home.html", context)
 
