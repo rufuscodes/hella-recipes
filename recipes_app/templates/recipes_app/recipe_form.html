@@ -8,9 +8,15 @@
     {% csrf_token %}
     {{ form.as_p }}
     {{ formset.management_form }}
+<div id="ingredient-wrapper">
     {% for ingredient_form in formset %}
-        {{ ingredient_form.as_p }}
+        <div class="ingredient-form">
+            {{ ingredient_form.as_p }}
+        </div>
     {% endfor %}
+</div>
+<button id="add-more">Add Another Ingredient</button>
+
     <input type="submit" value="Save Recipe" />
 
 
@@ -23,4 +29,26 @@
 
     </form>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    let wrapper = document.querySelector('#ingredient-wrapper');
+    let addButton = document.querySelector('#add-more');
+
+    addButton.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        let totalForms = document.querySelector('#id_ingredients-TOTAL_FORMS');
+        let formNum = parseInt(totalForms.value);
+        let newElement = wrapper.children[0].cloneNode(true);
+
+        let formRegex = RegExp(`ingredients-(\\d){1}-`, 'g');
+        newElement.innerHTML = newElement.innerHTML.replace(formRegex, `ingredients-${formNum}-`);
+
+        wrapper.appendChild(newElement);
+        totalForms.value = formNum + 1;
+    });
+});
+</script>
+
 {% endblock content %}
