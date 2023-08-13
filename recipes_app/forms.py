@@ -4,7 +4,7 @@ from .models import Recipe, RecipeIngredient, Ingredient
 class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
-        fields = ['title', 'description', 'image'] # Add more fields if necessary
+        fields = ['title', 'description', 'image'] 
 
 RecipeIngredientFormSet = forms.inlineformset_factory(
     Recipe, 

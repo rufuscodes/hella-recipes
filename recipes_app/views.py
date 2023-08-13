@@ -79,17 +79,40 @@ class RecipeCreateView(LoginRequiredMixin, CreateView):
 
 
 
-class RecipeUpdateView( LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class RecipeUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = models.Recipe
-    fields = ['title', 'description']
-    
+    form_class = RecipeForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.POST:
+            context['formset'] = RecipeIngredientFormSet(self.request.POST, instance=self.object, prefix='ingredients')
+        else:
+            context['formset'] = RecipeIngredientFormSet(instance=self.object, prefix='ingredients')
+        return context
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        formset = context['formset']
+
+        if formset.is_valid():
+            response = super().form_valid(form)
+            
+            formset.instance = self.object
+            formset.save()
+            
+            return response
+        else:
+            return self.form_invalid(form)
+
     def test_func(self):
         recipe = self.get_object()
         return self.request.user == recipe.author
-    
+
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
 
 class RecipeDeleteView( LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = models.Recipe
