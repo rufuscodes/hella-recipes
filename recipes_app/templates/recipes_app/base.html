@@ -61,6 +61,20 @@
               <a class="nav-link" href="#">Favorites</a>
             </li>
           </ul>
+          <!-- Adding the search form here -->
+          <form class="d-flex" action="{% url 'search_recipes' %}" method="GET">
+            <!-- CSRF token isn't necessary for GET requests, so it can be omitted -->
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+              name="q"
+            />
+            <button class="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </form>
         </div>
       </div>
     </nav>

@@ -1,3 +1,5 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render, HttpResponse, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -6,28 +8,6 @@ from .forms import RecipeForm, RecipeIngredientFormSet
 from django.urls import reverse_lazy
 
 from . import models
-
-
-def add_recipe(request):
-    if request.method == 'POST':
-        form = RecipeForm(request.POST, request.FILES)
-        formset = RecipeIngredientFormSet(request.POST, prefix='ingredients')
-        if form.is_valid() and formset.is_valid():
-            recipe = form.save(commit=False)
-            recipe.author = request.user
-            recipe.save()
-            
-            for ingredient_form in formset:
-                # Set the recipe before saving the ingredient
-                ingredient_instance = ingredient_form.save(commit=False)
-                ingredient_instance.recipe = recipe
-                ingredient_instance.save()
-                
-            return redirect('recipes-home')
-    else:
-        form = RecipeForm()
-        formset = RecipeIngredientFormSet(prefix='ingredients')
-    return render(request, 'your_template_name.html', {'form': form, 'formset': formset})
 
 
 # Create your views here.
@@ -124,3 +104,33 @@ class RecipeDeleteView( LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 def about(request):
     
     return render(request,"recipes_app/about.html", {'title': 'About this app'})
+
+def add_recipe(request):
+    if request.method == 'POST':
+        form = RecipeForm(request.POST, request.FILES)
+        formset = RecipeIngredientFormSet(request.POST, prefix='ingredients')
+        if form.is_valid() and formset.is_valid():
+            recipe = form.save(commit=False)
+            recipe.author = request.user
+            recipe.save()
+            
+            for ingredient_form in formset:
+                # Set the recipe before saving the ingredient
+                ingredient_instance = ingredient_form.save(commit=False)
+                ingredient_instance.recipe = recipe
+                ingredient_instance.save()
+                
+            return redirect('recipes-home')
+    else:
+        form = RecipeForm()
+        formset = RecipeIngredientFormSet(prefix='ingredients')
+    return render(request, 'recipe_form.html', {'form': form, 'formset': formset})
+
+class RecipeSearchView(ListView):
+    model = models.Recipe
+    template_name = 'recipes_app/home.html'
+    context_object_name = 'recipes'
+    
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        return self.model.objects.filter(title__icontains=query).order_by('-created_at')
