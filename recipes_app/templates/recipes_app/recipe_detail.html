@@ -16,11 +16,13 @@
       <ul>
         {% for ingredient_rel in object.recipeingredient_set.all %}
         <li>
-          Ingredients: {{ ingredient_rel }} <br />
+          <a href="{% url 'ingredient-detail' ingredient_rel.ingredient.pk %}"
+            >Ingredients: {{ ingredient_rel.ingredient.name }}</a
+          >
+          <br />
           Quantity: {{ ingredient_rel.quantity }} <br />
           Measurement: {{ ingredient_rel.measurement }} <br />
-          Ingredient Name: {{ ingredient_rel.ingredient.name }} <br />
-          Ingredient Description: {{ ingredient_rel.ingredient.description }}
+          Description: {{ ingredient_rel.ingredient.description }}
         </li>
         {% endfor %}
       </ul>

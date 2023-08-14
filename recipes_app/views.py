@@ -9,8 +9,6 @@ from django.urls import reverse_lazy
 
 from . import models
 
-
-# Create your views here.
 def home(request):
     recipes = models.Recipe.objects.all().prefetch_related('recipeingredient_set__ingredient')
 
@@ -126,6 +124,15 @@ def add_recipe(request):
         formset = RecipeIngredientFormSet(prefix='ingredients')
     return render(request, 'recipe_form.html', {'form': form, 'formset': formset})
 
+
+
+class IngredientDetailView(DetailView):
+    model = models.Ingredient
+    template_name = 'recipes_app/ingredient_detail.html'
+    context_object_name = 'ingredient'
+
+
+
 class RecipeSearchView(ListView):
     model = models.Recipe
     template_name = 'recipes_app/home.html'
@@ -133,4 +140,9 @@ class RecipeSearchView(ListView):
     
     def get_queryset(self):
         query = self.request.GET.get('q')
-        return self.model.objects.filter(title__icontains=query).order_by('-created_at')
+        if query:
+            return self.model.objects.filter(
+                Q(title__icontains=query) | 
+                Q(recipeingredient__ingredient__name__icontains=query)
+            ).distinct().order_by('-created_at')
+        return self.model.objects.all().order_by('-created_at')

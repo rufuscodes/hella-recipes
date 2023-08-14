@@ -61,9 +61,7 @@
               <a class="nav-link" href="#">Favorites</a>
             </li>
           </ul>
-          <!-- Adding the search form here -->
           <form class="d-flex" action="{% url 'search_recipes' %}" method="GET">
-            <!-- CSRF token isn't necessary for GET requests, so it can be omitted -->
             <input
               class="form-control me-2"
               type="search"
@@ -79,21 +77,18 @@
       </div>
     </nav>
 
-    <!-- Main Content Area -->
     <div class="container my-4 col-8">
       {% if messages %} {% for message in messages %}
       <div class="alert alert-{{ message.tags }}">{{ message }}</div>
       {% endfor %} {% endif %} {% block content %} {% endblock %}
     </div>
 
-    <!-- Footer -->
     <footer class="bg-light py-3">
       <div class="container text-center">
         <p>&copy; {{ year }} Hella Recipes App. All rights reserved.</p>
       </div>
     </footer>
 
-    <!-- Scripts -->
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
       integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
