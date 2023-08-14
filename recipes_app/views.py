@@ -3,6 +3,8 @@ from django.db.models.query import QuerySet
 from django.shortcuts import render, HttpResponse, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import get_object_or_404, redirect
+
 from .forms import RecipeForm, RecipeIngredientFormSet
 
 from django.urls import reverse_lazy
@@ -148,8 +150,31 @@ class RecipeSearchView(ListView):
                 Q(recipeingredient__ingredient__name__icontains=query)
             ).distinct().order_by('-created_at')
         return self.model.objects.all().order_by('-created_at')
-    
-    
+        
     def get_queryset(self):
         query = self.request.GET.get('q')
         return self.model.objects.filter(title__icontains=query).order_by('-created_at')
+        
+
+
+def FavoriteRecipe(request, pk):
+    recipe = get_object_or_404(models.Recipe, pk=pk)
+    if request.user not in recipe.favorited_by.all():
+        recipe.favorited_by.add(request.user)
+    return redirect(recipe.get_absolute_url())
+
+def UnfavoriteRecipe(request, pk):
+    recipe = get_object_or_404(models.Recipe, pk=pk)
+    recipe.favorited_by.remove(request.user)
+    return redirect(recipe.get_absolute_url())
+    
+class UserFavoriteRecipes(ListView):
+    model = models.Recipe
+    template_name = 'recipes_app/user_favorites.html'
+    context_object_name = 'recipes'
+
+    def get_queryset(self):
+        return self.request.user.favorited_recipes.all()   
+    
+
+    

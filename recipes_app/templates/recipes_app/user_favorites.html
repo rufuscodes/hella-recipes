@@ -1,0 +1,23 @@
+{% extends "recipes_app/base.html" %} {% block content %}
+<h2>Your Favorited Recipes</h2>
+
+{% if recipes %}
+<ul>
+  {% for recipe in recipes %}
+  <li>
+    <a href="{% url 'recipes-detail' recipe.pk %}">{{ recipe.title }}</a>
+
+    <!-- Optional: Add an unfavorite button next to each recipe -->
+    <a
+      href="{% url 'unfavorite-recipe' recipe.pk %}"
+      class="btn btn-danger btn-sm"
+      >Unfavorite</a
+    >
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>
+  You haven't favorited any recipes yet. Browse the recipes and favorite some!
+</p>
+{% endif %} {% endblock %}
