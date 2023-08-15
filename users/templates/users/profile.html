@@ -5,4 +5,11 @@
 <div class="conatiner">
   <h1>{{ user.username }}</h1>
 </div>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ u_form.as_p }}
+    {{ p_form.as_p }}
+    <button type="submit">Update</button>
+</form>
 {% endblock content %}

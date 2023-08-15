@@ -26,10 +26,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+    'users.apps.UsersConfig',
+
     #Locally Created apps
     'recipes_app',
-    'users',
     
     
     # extra packages
