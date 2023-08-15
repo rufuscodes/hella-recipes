@@ -1,10 +1,18 @@
 from django import forms
-from .models import Recipe, RecipeIngredient, Ingredient
+from .models import Recipe, RecipeIngredient, Ingredient, Category
 
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ['name', 'description'] 
+        
+        
 class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
-        fields = ['title', 'description', 'image'] 
+        fields = ['title', 'description', 'category', 'image']
+
 
 RecipeIngredientFormSet = forms.inlineformset_factory(
     Recipe, 

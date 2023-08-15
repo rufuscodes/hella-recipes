@@ -17,6 +17,10 @@ urlpatterns = [
     path('recipes/<int:pk>/favorite/', views.FavoriteRecipe, name="favorite-recipe"),
     path('recipes/<int:pk>/unfavorite/', views.UnfavoriteRecipe, name="unfavorite-recipe"),
     path('favorites/', views.UserFavoriteRecipes.as_view(), name="user-favorites"),
+    path('add-category/', views.add_category, name='add-category'),
+    path('recipes/', views.recipe_list_by_category, name='recipe-list-by-category'),
+
+
 
 
 ]

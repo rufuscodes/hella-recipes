@@ -1,0 +1,35 @@
+{% extends 'recipes_app/base.html' %} 
+
+{% block content %}
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">Add Category</h1>
+    <div class="card">
+      <header class="card-header">
+        <p class="card-header-title">Category Form</p>
+      </header>
+      <div class="card-content">
+        <form method="POST" action="{% url 'add-category' %}">
+          {% csrf_token %}
+          
+          <div class="field">
+            <label class="label">{{ form.name.label }}</label>
+            <div class="control">
+              {{ form.name }}
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="control">
+              <input type="submit" value="Add Category" class="button is-primary">
+              <a class="button is-light" href="{% url 'dashboard' %}">Cancel</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

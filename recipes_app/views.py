@@ -1,11 +1,13 @@
 from typing import Any
-from django.db.models.query import QuerySet
+from django.db.models.query import QuerySet 
 from django.shortcuts import render, HttpResponse, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import get_object_or_404, redirect
+from django.db.models import Count
 
-from .forms import RecipeForm, RecipeIngredientFormSet
+
+from .forms import RecipeForm, RecipeIngredientFormSet, CategoryForm
 
 from django.urls import reverse_lazy
 
@@ -13,13 +15,6 @@ from . import models
 
 
 # Create your views here.
-def home(request):
-    recipes = models.Recipe.objects.all().prefetch_related('recipeingredient_set__ingredient')
-
-    context= {
-        'recipes': recipes,
-    }
-    return render(request,"recipes_app/home.html", context)
 
 class RecipeListView(ListView):
     model = models.Recipe
@@ -177,4 +172,30 @@ class UserFavoriteRecipes(ListView):
         return self.request.user.favorited_recipes.all()   
     
 
-    
+def add_category(request):
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # Redirect to a success page or dashboard after saving
+            return redirect('dashboard')
+    else:
+        form = CategoryForm()
+
+    context = {'form': form}
+    return render(request, 'recipes_app/recipe_form.html', context)    
+
+def recipe_list_by_category(request):
+    category_name = request.GET.get('category')
+    if category_name:
+        category = models.Category.objects.get(name=category_name)
+        recipes = models.Recipe.objects.filter(category=category)
+    else:
+        recipes = models.Recipe.objects.all()
+
+    context = {
+        'recipes': recipes
+    }
+    return render(request, 'recipes_app/home.html', context)
+
+

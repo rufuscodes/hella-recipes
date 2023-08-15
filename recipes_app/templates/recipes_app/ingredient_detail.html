@@ -1,15 +1,37 @@
-{% extends "recipes_app/base.html" %} {% block content %}
-<h2>{{ ingredient.name }}</h2>
-<p>{{ ingredient.description }}</p>
-<img src="{{ ingredient.image_url }}" alt="{{ ingredient.name }}" />
-<h3>Recipes using this ingredient:</h3>
-<ul>
-  {% for recipe_ingredient in ingredient.recipeingredient_set.all %}
-  <li>
-    <a href="{{ recipe_ingredient.recipe.get_absolute_url }}"
-      >{{ recipe_ingredient.recipe.title }}</a
-    >
-  </li>
-  {% endfor %}
-</ul>
+{% extends "recipes_app/base.html" %} 
+{% block content %}
+
+<section class="section">
+  <div class="container">
+    <div class="card">
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48">
+              <img src="{{ ingredient.image_url }}" alt="{{ ingredient.name }}">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-4">{{ ingredient.name }}</p>
+            <p class="subtitle is-6">{{ ingredient.description }}</p>
+          </div>
+        </div>
+
+        <div class="content">
+          <h5 class="title is-5">Recipes using this ingredient:</h5>
+          <ul>
+            {% for recipe_ingredient in ingredient.recipeingredient_set.all %}
+            <li class="mb-2">
+              <a href="{{ recipe_ingredient.recipe.get_absolute_url }}">
+                {{ recipe_ingredient.recipe.title }}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 {% endblock %}
