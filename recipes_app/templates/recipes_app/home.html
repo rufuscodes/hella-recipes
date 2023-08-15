@@ -9,13 +9,13 @@
             <h1 class="mb-6"> Find the perfect recipe.
             </h1>
             <ul class="widget-list-inline mb-4">
-              <li class="list-inline-item"><a href="{{ request.path }}?category=American%20Soul">American Soul</a></li>
-              <li class="list-inline-item"><a href="{{ request.path }}?category=Smhack">Smhack</a></li>
-              <li class="list-inline-item"><a href="{{ request.path }}?category=Vegan">Vegan</a></li>
-              <li class="list-inline-item"><a href="{{ request.path }}?category=Korean">Korean</a></li>
-              <li class="list-inline-item"><a href="{{ request.path }}?category=Mexican">Mexican</a></li>
-              <li class="list-inline-item"><a href="{{ request.path }}?category=Greek">Greek</a></li>
-              <li class="list-inline-item"><a href="{{ request.path }}?category=BBQ">BBQ</a></li>
+              <li class="list-inline-item"><a href="recipes/?category=American%20Soul">American Soul</a></li>
+              <li class="list-inline-item"><a href="recipes/?category=Smhack">Smhack</a></li>
+              <li class="list-inline-item"><a href="recipes/?category=Vegan">Vegan</a></li>
+              <li class="list-inline-item"><a href="recipes/?category=Korean">Korean</a></li>
+              <li class="list-inline-item"><a href="recipes/?category=Mexican">Mexican</a></li>
+              <li class="list-inline-item"><a href="recipes/?category=Greek">Greek</a></li>
+              <li class="list-inline-item"><a href="recipes/?category=BBQ">BBQ</a></li>
             </ul>
           </div>
         </div>
@@ -148,11 +148,13 @@
       <article class="card">
         <div class="card-image">
           <figure class="image is-4by3">
+            <a href="{% url 'recipes-detail' recipe.pk %}">
             <img src="/media/{{ recipe.image }}" alt="Recipe Image">
+            </a>
           </figure>
         </div>
         <div class="card-content">
-          <h2 class="title is-4">{{ recipe.title }}</h2>
+          <h2 class="title is-4"><a href="{% url 'recipes-detail' recipe.pk %}">{{ recipe.title }}</a></h2>
           <h6 class="subtitle is-6">{{ recipe.author }} | {{ recipe.created_at }}</h6>
           <h5 class="title is-5 mt-3">Ingredients:</h5>
           <ul>
@@ -162,8 +164,6 @@
             </li>
             {% endfor %}
           </ul>
-          <h5 class="title is-5 mt-3">Directions:</h5>
-          <p>{{ recipe.description }}</p>
         </div>
         <footer class="card-footer">
           {% if user == recipe.author %}
