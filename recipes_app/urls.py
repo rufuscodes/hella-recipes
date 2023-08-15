@@ -20,7 +20,4 @@ urlpatterns = [
     path('add-category/', views.add_category, name='add-category'),
     path('recipes/', views.recipe_list_by_category, name='recipe-list-by-category'),
 
-
-
-
 ]
