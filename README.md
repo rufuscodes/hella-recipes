@@ -39,9 +39,7 @@ Set Up a Virtual Environment:
 source env/bin/activate  # On Windows, use `env\Scripts\activate`
 Install Required Packages:
 
-3. bash
-Copy code
-pip install -r requirements.txt
+3. pip install -r requirements.txt
 Run Migrations:
 
 
@@ -67,7 +65,19 @@ python seed_ingredients_script.py
 # Pre-development Planning
 <img src="./screenshots/hella-recipes-wireframe.png" alt="Hella Recipes Add Recipe Page" style="max-width:100%; height:auto;">
 
+# Stretch Goals
 
+1. Personalized Recommendations: Implement a recommendation system that suggests recipes based on user preferences, dietary restrictions, or previous recipes they've viewed or liked.
+
+2. Social Integration:
+Allow users to share recipes on social media platforms.
+Enable users to comment on and like recipes using their social media accounts.
+
+3. Interactive Cooking Mode: A step-by-step cooking guide that users can follow in real-time, with timers for each step.
+
+4. Shopping List Integration: Allow users to add ingredients from a recipe to a shopping list, which they can then print or access from a mobile device.
+
+5. Weekly Meal Planner: Allow users to plan their meals for the week, generating a consolidated shopping list.
 
 
 🤝 Contributing
