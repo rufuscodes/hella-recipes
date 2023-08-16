@@ -1,5 +1,6 @@
 #Hella Recipes Django App
-<img src="https://res.cloudinary.com/practicaldev/image/fetch/s--zEB5JVr7--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://img.shields.io/badge/Python-3776AB%3Fstyle%3Dfor-the-badge%26logo%3Dpython%26logoColor%3Dwhite" loading="lazy" width="94" height="28">
+
+<img src="https://res.cloudinary.com/practicaldev/image/fetch/s--zEB5JVr7--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://img.shields.io/badge/Python-3776AB%3Fstyle%3Dfor-the-badge%26logo%3Dpython%26logoColor%3Dwhite" loading="lazy" width="94" height="28"/>
 
 <img src="https://res.cloudinary.com/practicaldev/image/fetch/s--AJzBBW6N--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://img.shields.io/badge/Django-092E20%3Fstyle%3Dfor-the-badge%26logo%3Ddjango%26logoColor%3Dwhite" loading="lazy" width="94" height="28">
 
@@ -8,12 +9,10 @@
 Hella Recipes is a Django-based web application that allows users to browse, create, and manage recipes. Users can also maintain a list of ingredients and associate them with recipes.
 
 
-<img src="./screenshots/2.png" alt="Hella Recipes Home Page" style="max-width:100%; height:auto;">
-</ br>
 <img src="./screenshots/1.png" alt="Hella Recipes Single recipe Page" style="max-width:100%; height:auto;">
-</ br>
+
 <img src="./screenshots/3.png" alt="Hella Recipes Ingredient Page" style="max-width:100%; height:auto;">
-</ br>
+
 <img src="./screenshots/4.png" alt="Hella Recipes Add Recipe Page" style="max-width:100%; height:auto;">
 
 
@@ -59,6 +58,9 @@ To seed ingredients into the database:
 7. Prepare a text file named ingredients.txt with each ingredient on a new line.
 Run the provided seeding script:
 python seed_ingredients_script.py
+
+
+<img src="./screenshots/2.png" alt="Hella Recipes Home Page" style="max-width:100%; height:auto;">
 
 
 
