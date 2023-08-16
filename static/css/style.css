@@ -25,7 +25,7 @@ form > label {display: block; margin-bottom: 10px;}
 form {
   display: block !important;
 }
-article.card, card {
+article.card, card, .list-inline-item > a {
     -moz-border-radius: 0% 0% 100% 100% / 0% 0% 8px 8px;
       -webkit-border-radius: 0% 0% 100% 100% / 0% 0% 8px 8px;
       border-radius: 0% 0% 100% 100% / 0% 0% 8px 8px;
